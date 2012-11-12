@@ -15,8 +15,12 @@
 - (void)updateSliderArrayWithView:(UIView *)view;
 - (void)updateSubviewAllignmentWithView:(UIView *)view;
 
-- (void)switchViews;
-- (void)shiftArray;
+- (void)switchViewsPopTop;
+- (void)switchViewsBringBottomUp;
+- (void)switchViewsResetBottom;
+
+- (void)shiftArrayPopTop;
+- (void)shiftArrayAddBottom;
 - (void)animateSliderIn:(UIControl *)control;
 
 
@@ -127,7 +131,7 @@
                              [[(TicketsView *)view containerView] setFrame:containerViewFrame];
                              
                              [self animateSliderIn:control];
-                             [self switchViews];
+                             [self switchViewsPopTop];
                          }];
     } else {
         [UIView animateWithDuration:0.4
@@ -152,49 +156,40 @@
     UIControl *control = sender;
     CGRect frame = control.frame;
 
-    UIView *view = [_circularArray objectAtIndex:0];
+    UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
+    [self switchViewsBringBottomUp];
+    
     __block CGRect viewFrame = view.frame;
 
     frame.origin.x = roundf(point.x - (frame.size.width / 2.0f));
     if (frame.origin.x >= 0.0f && frame.origin.x <= self.frame.size.width - 20.0f) {
         control.frame = frame;
         viewFrame = view.frame;
-        viewFrame.origin.x = CGRectGetMinX(frame);
+        viewFrame.origin.x = CGRectGetMaxX(frame) - viewFrame.size.width;
         view.frame = viewFrame;
-        
-        CGRect containerViewFrame = [[(TicketsView *)view containerView] frame];
-        containerViewFrame.origin.x = 0.0f - viewFrame.origin.x;
-        [[(TicketsView *)view containerView] setFrame:containerViewFrame];
     }
 }
 
 - (void)leftSliderDragExit:(id)sender forEvent:(UIEvent *)event {
     UIControl *control = sender;
     __block CGRect frame = control.frame;
-    UIView *view = [_circularArray objectAtIndex:0];
+    UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
     __block CGRect viewFrame = view.frame;
-    __block CGRect containerViewFrame = [[(TicketsView *)view containerView] frame];
     
     if (frame.origin.x > self.frame.size.width - 60.0f) {
         [UIView animateWithDuration:0.4
                          animations:^{
                              frame.origin.x = self.frame.size.width - 20.0f;
                              control.frame = frame;
-                             viewFrame.origin.x = CGRectGetMinX(frame);
+                             viewFrame.origin.x = 0.0f;
                              view.frame = viewFrame;
-                             
-                             containerViewFrame.origin.x = 0.0f - viewFrame.origin.x;
-                             [[(TicketsView *)view containerView] setFrame:containerViewFrame];
                          }
                          completion:^(BOOL finished){
-                             viewFrame.origin.x = self.frame.size.width - viewFrame.size.width;
+                             viewFrame.origin.x = 0.0f;
                              view.frame = viewFrame;
-                             
-                             containerViewFrame.origin.x = 0.0f;
-                             [[(TicketsView *)view containerView] setFrame:containerViewFrame];
-                             
+                             [self shiftArrayAddBottom];
                              [self animateSliderIn:control];
-                             [self switchViews];
+                            
                          }];
     } else {
         [UIView animateWithDuration:0.4
@@ -202,13 +197,14 @@
                              frame.origin.x = 0.0f;
                              control.frame = frame;
                              
-                             viewFrame.origin.x = 0.0f;
+                             viewFrame.origin.x = CGRectGetMaxX(frame) - viewFrame.size.width;
                              view.frame = viewFrame;
-                             
-                             containerViewFrame.origin.x = 0.0f;
-                             [[(TicketsView *)view containerView] setFrame:containerViewFrame];
                          }
                          completion:^(BOOL finished){
+                             viewFrame.origin.x = 0.0f;
+                             view.frame = viewFrame;
+                             [view removeFromSuperview];
+                             [self insertSubview:view belowSubview:[_circularArray objectAtIndex:[_circularArray count] - 2]];
                          }];
     }
 }
@@ -237,23 +233,35 @@
 
 #pragma mark - Array Mehthods
 
-- (void)switchViews {
-    for (int i = 0; i < [[self subviews] count]; i++) {
-        UIView *view = [[self subviews] objectAtIndex:i];
-        if ([_circularArray containsObject:view]) {
-            [view removeFromSuperview];
-            [self insertSubview:view atIndex:i+1];
-            break;
-        }
-    }
-    [self shiftArray];
+- (void)switchViewsPopTop {
+    UIView *view = [_circularArray objectAtIndex:0];
+    [view removeFromSuperview];
+    [self insertSubview:view belowSubview:[_circularArray objectAtIndex:[_circularArray count] - 1]];
+    
+    [self shiftArrayPopTop];
 }
 
-- (void)shiftArray {
+- (void)switchViewsResetBottom {
+    UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
+    [view removeFromSuperview];
+    [self insertSubview:view belowSubview:[_circularArray objectAtIndex:[_circularArray count] - 2]];
+}
+
+- (void)switchViewsBringBottomUp {
+    UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
+    [view removeFromSuperview];
+    [self insertSubview:view aboveSubview:[_circularArray objectAtIndex:0]];
+}
+
+- (void)shiftArrayPopTop {
     UIView *view = [_circularArray objectAtIndex:0];
     [_circularArray removeObjectAtIndex:0];
     [_circularArray addObject:view];
 }
 
-
+- (void)shiftArrayAddBottom {
+    UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
+    [_circularArray removeObjectAtIndex:[_circularArray count] - 1];
+    [_circularArray insertObject:view atIndex:0];
+}
 @end
