@@ -10,11 +10,13 @@
 
 @implementation TicketsView
 
+@synthesize containerView = _containerView;
+
 - (id)init {
     UINib *nib = [UINib nibWithNibName:@"TicketsView" bundle:nil];
     self = (TicketsView *)[[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
     if (self) {
-        
+        [self setClipsToBounds:YES];
     }
     return self;
 }

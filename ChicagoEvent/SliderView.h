@@ -11,9 +11,10 @@
 
 @interface SliderView : UIView {
     NSMutableArray *_circularArray;
-    UIButton *_sliderButton;
+    UIButton *_rightSliderButton;
 }
 
 - (void)insertView:(UIView *)view;
+- (void)disableSliderHidden;
 
 @end

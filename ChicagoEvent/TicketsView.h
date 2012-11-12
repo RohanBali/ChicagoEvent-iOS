@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TicketsView : UIView
+@interface TicketsView : UIView {
+    
+}
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 @end

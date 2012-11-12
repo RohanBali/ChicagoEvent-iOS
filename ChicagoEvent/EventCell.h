@@ -16,8 +16,7 @@
     SliderView *_sliderView;
     TitleView *_titlevView;
     TicketsView *_ticketView;
-    NSMutableArray *_circularArray;
-    UIButton *_sliderButton;
+    UIImageView *_backgroundImageView;
 }
 
 @end

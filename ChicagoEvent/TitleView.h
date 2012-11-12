@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TitleView : UIView
+@interface TitleView : UIView {
+    
+}
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 @end

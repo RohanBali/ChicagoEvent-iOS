@@ -24,7 +24,6 @@
 		4E5FC29216172B6F0066FBF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E5FC29016172B6F0066FBF5 /* InfoPlist.strings */; };
 		4E5FC29516172B6F0066FBF5 /* ChicagoEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5FC29416172B6F0066FBF5 /* ChicagoEventTests.m */; };
 		4EBFCA71163CB35600401EE9 /* ChicagoTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFCA70163CB35600401EE9 /* ChicagoTabBarController.m */; };
-		4EBFCA74163CB8A100401EE9 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCA73163CB8A100401EE9 /* button.png */; };
 		4EBFCA80163E198400401EE9 /* ChicagoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFCA7F163E198400401EE9 /* ChicagoNavigationController.m */; };
 		4EBFCA8A1640BD0900401EE9 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFCA891640BD0900401EE9 /* EventCell.m */; };
 		4EBFCA8D1640BE6000401EE9 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFCA8C1640BE6000401EE9 /* TitleView.m */; };
@@ -33,6 +32,7 @@
 		4EBFCA991640C35C00401EE9 /* TicketsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCA981640C35C00401EE9 /* TicketsView.xib */; };
 		4EBFCA9D1640D35B00401EE9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCA9C1640D35B00401EE9 /* background.png */; };
 		4EBFCAA91640D46700401EE9 /* background_orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCAA81640D46700401EE9 /* background_orange.png */; };
+		4ED9E7A416503F8D0015AA4D /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED9E7A316503F8D0015AA4D /* button.png */; };
 		4EFF21011650330A0078ED60 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF21001650330A0078ED60 /* SliderView.m */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +71,6 @@
 		4E5FC29416172B6F0066FBF5 /* ChicagoEventTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChicagoEventTests.m; sourceTree = "<group>"; };
 		4EBFCA6F163CB35600401EE9 /* ChicagoTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChicagoTabBarController.h; sourceTree = "<group>"; };
 		4EBFCA70163CB35600401EE9 /* ChicagoTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChicagoTabBarController.m; sourceTree = "<group>"; };
-		4EBFCA73163CB8A100401EE9 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../../../../Downloads/button.png; sourceTree = "<group>"; };
 		4EBFCA7E163E198400401EE9 /* ChicagoNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChicagoNavigationController.h; sourceTree = "<group>"; };
 		4EBFCA7F163E198400401EE9 /* ChicagoNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChicagoNavigationController.m; sourceTree = "<group>"; };
 		4EBFCA881640BD0900401EE9 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		4EBFCA981640C35C00401EE9 /* TicketsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketsView.xib; sourceTree = "<group>"; };
 		4EBFCA9C1640D35B00401EE9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Images/background.png; sourceTree = "<group>"; };
 		4EBFCAA81640D46700401EE9 /* background_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_orange.png; path = Images/background_orange.png; sourceTree = "<group>"; };
+		4ED9E7A316503F8D0015AA4D /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../../../Downloads/button.png; sourceTree = "<group>"; };
 		4EFF20FF1650330A0078ED60 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
 		4EFF21001650330A0078ED60 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,9 +202,9 @@
 		4EBFCA72163CB89300401EE9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4ED9E7A316503F8D0015AA4D /* button.png */,
 				4EBFCAA81640D46700401EE9 /* background_orange.png */,
 				4EBFCA9C1640D35B00401EE9 /* background.png */,
-				4EBFCA73163CB8A100401EE9 /* button.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -353,11 +353,11 @@
 				4E5FC27816172B6F0066FBF5 /* Default@2x.png in Resources */,
 				4E5FC27A16172B6F0066FBF5 /* Default-568h@2x.png in Resources */,
 				4E5FC28016172B6F0066FBF5 /* HomeViewController.xib in Resources */,
-				4EBFCA74163CB8A100401EE9 /* button.png in Resources */,
 				4EBFCA911640BEED00401EE9 /* TitleView.xib in Resources */,
 				4EBFCA991640C35C00401EE9 /* TicketsView.xib in Resources */,
 				4EBFCA9D1640D35B00401EE9 /* background.png in Resources */,
 				4EBFCAA91640D46700401EE9 /* background_orange.png in Resources */,
+				4ED9E7A416503F8D0015AA4D /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
