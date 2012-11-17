@@ -8,13 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SliderViewDelegate <NSObject>
+
+- (void)didSlideToIndex:(int)index;
+
+@end
+
 
 @interface SliderView : UIView {
     NSMutableArray *_circularArray;
     UIButton *_rightSliderButton;
     UIButton *_leftSliderButton;
+    NSMutableArray *_staticArray; //this array reflects the initial state of the slider
 }
 
+@property (nonatomic, weak) id<SliderViewDelegate> delegate;
+
+- (void)resetSliderAtIndex:(int)index;
 - (void)insertView:(UIView *)view;
 - (void)disableSliderHidden;
 

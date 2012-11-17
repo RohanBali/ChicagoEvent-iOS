@@ -32,6 +32,8 @@
 		4EBFCA991640C35C00401EE9 /* TicketsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCA981640C35C00401EE9 /* TicketsView.xib */; };
 		4EBFCA9D1640D35B00401EE9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCA9C1640D35B00401EE9 /* background.png */; };
 		4EBFCAA91640D46700401EE9 /* background_orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFCAA81640D46700401EE9 /* background_orange.png */; };
+		4EC0033F1657356000BC3CF6 /* SocialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0033E1657356000BC3CF6 /* SocialView.m */; };
+		4EC003411657357F00BC3CF6 /* SocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EC003401657357F00BC3CF6 /* SocialView.xib */; };
 		4ED9E7A416503F8D0015AA4D /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED9E7A316503F8D0015AA4D /* button.png */; };
 		4EFF21011650330A0078ED60 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFF21001650330A0078ED60 /* SliderView.m */; };
 /* End PBXBuildFile section */
@@ -83,6 +85,9 @@
 		4EBFCA981640C35C00401EE9 /* TicketsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketsView.xib; sourceTree = "<group>"; };
 		4EBFCA9C1640D35B00401EE9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Images/background.png; sourceTree = "<group>"; };
 		4EBFCAA81640D46700401EE9 /* background_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_orange.png; path = Images/background_orange.png; sourceTree = "<group>"; };
+		4EC0033D1657356000BC3CF6 /* SocialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialView.h; sourceTree = "<group>"; };
+		4EC0033E1657356000BC3CF6 /* SocialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialView.m; sourceTree = "<group>"; };
+		4EC003401657357F00BC3CF6 /* SocialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialView.xib; sourceTree = "<group>"; };
 		4ED9E7A316503F8D0015AA4D /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../../../Downloads/button.png; sourceTree = "<group>"; };
 		4EFF20FF1650330A0078ED60 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
 		4EFF21001650330A0078ED60 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
@@ -240,6 +245,7 @@
 		4EBFCA8E1640BEBC00401EE9 /* Event Cell */ = {
 			isa = PBXGroup;
 			children = (
+				4EC0033B1657352C00BC3CF6 /* SocialView */,
 				4EBFCA931640C2FF00401EE9 /* TicketsView */,
 				4EBFCA8F1640BECC00401EE9 /* TitleView */,
 				4EBFCA881640BD0900401EE9 /* EventCell.h */,
@@ -266,6 +272,16 @@
 				4EBFCA981640C35C00401EE9 /* TicketsView.xib */,
 			);
 			name = TicketsView;
+			sourceTree = "<group>";
+		};
+		4EC0033B1657352C00BC3CF6 /* SocialView */ = {
+			isa = PBXGroup;
+			children = (
+				4EC0033D1657356000BC3CF6 /* SocialView.h */,
+				4EC0033E1657356000BC3CF6 /* SocialView.m */,
+				4EC003401657357F00BC3CF6 /* SocialView.xib */,
+			);
+			name = SocialView;
 			sourceTree = "<group>";
 		};
 		4EFF20FD1650328C0078ED60 /* SliderView */ = {
@@ -358,6 +374,7 @@
 				4EBFCA9D1640D35B00401EE9 /* background.png in Resources */,
 				4EBFCAA91640D46700401EE9 /* background_orange.png in Resources */,
 				4ED9E7A416503F8D0015AA4D /* button.png in Resources */,
+				4EC003411657357F00BC3CF6 /* SocialView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +418,7 @@
 				4EBFCA8D1640BE6000401EE9 /* TitleView.m in Sources */,
 				4EBFCA971640C33500401EE9 /* TicketsView.m in Sources */,
 				4EFF21011650330A0078ED60 /* SliderView.m in Sources */,
+				4EC0033F1657356000BC3CF6 /* SocialView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

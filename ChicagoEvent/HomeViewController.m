@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "EventCell.h"
 
 @interface HomeViewController ()
 
@@ -23,10 +22,10 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)viewDidLoad {
+    _cellIndexArray = [[NSMutableArray alloc] init]; //Cell array is used to use the same cell at that index path, so the slider state is maintained
     
+    [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -40,15 +39,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:kEventCellReuseIdentifier];
-    if(!cell) {
-        cell = [[EventCell alloc] init];
+    if (!cell) {
+        cell = [[EventCell alloc] init]; //Don't reuse becuase it resets
     }
-    
-//    [cell.textLabel setText:@"This Cell is ok"];
-//    [cell.textLabel setTextColor:[UIColor blackColor]];
-//    [cell.textLabel setBackgroundColor:[UIColor clearColor]];
-//    UIImageView *cellImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,cell.frame.size.width, 44.0f)];
-//    [cell setBackgroundView:cellImage];
+    cell.delegate = self;
+    [cell configureWithIndex:indexPath.row];
+    if ([_cellIndexArray count] > indexPath.row) {
+        [cell resetSliderAtIndex:[(NSNumber *)([_cellIndexArray objectAtIndex:indexPath.row]) intValue]];
+    } else {
+        [_cellIndexArray addObject:[NSNumber numberWithInt:0]];
+        [cell resetSliderAtIndex:0];
+    }
     
     return cell;
 }
@@ -70,6 +71,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45.0f;
+}
+
+#pragma mark - EventCell Delegate Methods
+
+- (void)cellAtRow:(int)row didSlideToIndex:(int)index {
+    [_cellIndexArray replaceObjectAtIndex:row withObject:[NSNumber numberWithInt:index]];
 }
 
 @end

@@ -17,10 +17,13 @@
 - (void)setupImageView;
 - (void)setupTitle;
 - (void)setupTicket;
+- (void)setupSocial;
 
 @end
 
 @implementation EventCell
+
+@synthesize delegate = _delegate;
 
 - (id)init {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kEventCellReuseIdentifier];
@@ -28,6 +31,7 @@
         [self setupSliderView];
         [self setupTitle];
         [self setupTicket];
+        [self setupSocial];
         [self setupImageView];
     }
     return self;
@@ -45,10 +49,21 @@
     [_sliderView disableSliderHidden];
 }
 
+#pragma marl - Public Methods
+
+- (void)resetSliderAtIndex:(int)index {
+    [_sliderView resetSliderAtIndex:index];
+}
+
+- (void)configureWithIndex:(int)index {
+    _index = index;
+}
+
 #pragma mark - Setup Methods
 
 - (void)setupSliderView {
     _sliderView = [[SliderView alloc] init];
+    _sliderView.delegate = self;
     CGRect frame = _sliderView.frame;
     frame.origin.x = self.frame.size.width - frame.size.width;
     _sliderView.frame = frame;
@@ -71,5 +86,17 @@
     [_sliderView insertView:_ticketView];
 }
 
+- (void)setupSocial {
+    _socialView = [[SocialView alloc] init];
+    [_sliderView insertView:_socialView];
+}
+
+#pragma mark - Delegate Methods
+
+- (void)didSlideToIndex:(int)index {
+    if ([_delegate respondsToSelector:@selector(cellAtRow:didSlideToIndex:)]) {
+        [_delegate cellAtRow:_index didSlideToIndex:index];
+    }
+}
 
 @end

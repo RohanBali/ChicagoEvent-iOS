@@ -28,11 +28,14 @@
 
 @implementation SliderView
 
+@synthesize delegate = _delegate;
+
 - (id)init {
     self = [super init];
     if (self) {
         self.frame = CGRectMake(0.0f, 0.0f , 240.0f , 44.0f);
         _circularArray = [[NSMutableArray alloc] init];
+        _staticArray = [[NSMutableArray alloc] init];
         [self setClipsToBounds:YES];
         [self setupSliderButtons];
     }
@@ -60,9 +63,19 @@
 
 #pragma mark - Public Methods
 
+- (void)resetSliderAtIndex:(int)index {
+    if ([_staticArray count] > index) {
+        while ([_circularArray objectAtIndex:0] != [_staticArray objectAtIndex:index]) {
+            [self switchViewsPopTop];
+        }
+    }
+    return;
+}
+
 - (void)insertView:(UIView *)view {
     [self updateSliderArrayWithView:view];
     [self updateSubviewAllignmentWithView:view];
+    [_staticArray insertObject:view atIndex:0];
 }
 
 - (void)disableSliderHidden {
@@ -236,7 +249,7 @@
 - (void)switchViewsPopTop {
     UIView *view = [_circularArray objectAtIndex:0];
     [view removeFromSuperview];
-    [self insertSubview:view belowSubview:[_circularArray objectAtIndex:[_circularArray count] - 1]];
+    [self insertSubview:view belowSubview:[_circularArray objectAtIndex:MAX(0,[_circularArray count] - 1)]];
     
     [self shiftArrayPopTop];
 }
@@ -257,11 +270,23 @@
     UIView *view = [_circularArray objectAtIndex:0];
     [_circularArray removeObjectAtIndex:0];
     [_circularArray addObject:view];
+    [self callDelegate];
 }
 
 - (void)shiftArrayAddBottom {
     UIView *view = [_circularArray objectAtIndex:[_circularArray count] - 1];
     [_circularArray removeObjectAtIndex:[_circularArray count] - 1];
     [_circularArray insertObject:view atIndex:0];
+    [self callDelegate];
 }
+
+#pragma mark - Delegate Helper Methods
+
+- (void)callDelegate {
+    int index = [_staticArray indexOfObject:[_circularArray objectAtIndex:0]];
+    if ([_delegate respondsToSelector:@selector(didSlideToIndex:)]) {
+        [_delegate didSlideToIndex:index];
+    }
+}
+
 @end

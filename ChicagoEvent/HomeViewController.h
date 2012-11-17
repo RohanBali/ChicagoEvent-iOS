@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventCell.h"
 
-@interface HomeViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>{
+@interface HomeViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,EventCellDelegate>{
      UIScrollView *_scrollView;
     IBOutlet UITableView *_tableView;
+    NSMutableArray *_cellIndexArray;
 }
 
 - (id)initWithNib;
