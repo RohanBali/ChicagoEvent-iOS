@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "EventCell.h"
+#import "EventsManager.h"
 
-@interface HomeViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,EventCellDelegate>{
+@interface HomeViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,EventCellDelegate, EventsManagerDelegate>{
      UIScrollView *_scrollView;
     IBOutlet UITableView *_tableView;
-    NSMutableArray *_cellIndexArray;
+    NSMutableDictionary *_cellIndexDictionary;
 }
 
 - (id)initWithNib;

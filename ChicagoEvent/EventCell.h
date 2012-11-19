@@ -11,12 +11,13 @@
 #import "TitleView.h"
 #import "SliderView.h"
 #import "SocialView.h"
+#import "Event.h"
 
 #define kEventCellReuseIdentifier @"EventCellReuseIdentifier"
 
 @protocol EventCellDelegate <NSObject>
 
-- (void)cellAtRow:(int)row didSlideToIndex:(int)index;
+- (void)cellAtIndex:(NSIndexPath *)cellIndex didSlideToIndex:(int)index;
 
 @end
 
@@ -26,13 +27,13 @@
     TicketsView *_ticketView;
     SocialView *_socialView;
     UIImageView *_backgroundImageView;
-    int _index;
+    Event *_event;
+    NSIndexPath *_index;
 }
 
 @property (nonatomic, weak) id<EventCellDelegate> delegate;
 
-- (void)configureWithIndex:(int)index;
-
+- (void)configureWithIndex:(NSIndexPath *)cellIndex andEvent:(Event *)event;
 - (void)resetSliderAtIndex:(int)index;
 
 @end

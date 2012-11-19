@@ -23,10 +23,16 @@
 }
 
 - (void)viewDidLoad {
-    _cellIndexArray = [[NSMutableArray alloc] init]; //Cell array is used to use the same cell at that index path, so the slider state is maintained
+    _cellIndexDictionary = [[NSMutableDictionary alloc] init]; //Cell array is used to use the same cell at that index path, so the slider state is maintained
     
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[EventsManager getSharedInstance] setDelegate:self];
+    [[EventsManager getSharedInstance] getMoreEvents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,11 +49,16 @@
         cell = [[EventCell alloc] init]; //Don't reuse becuase it resets
     }
     cell.delegate = self;
-    [cell configureWithIndex:indexPath.row];
-    if ([_cellIndexArray count] > indexPath.row) {
-        [cell resetSliderAtIndex:[(NSNumber *)([_cellIndexArray objectAtIndex:indexPath.row]) intValue]];
+    NSString *evetDateKey = [[[EventsManager getSharedInstance] sortedKeys] objectAtIndex:indexPath.section];
+    NSArray *eventForDate = [[[EventsManager getSharedInstance] eventsDictionary] objectForKey:evetDateKey];
+    [cell configureWithIndex:indexPath andEvent:[eventForDate objectAtIndex:indexPath.row]];
+    
+    NSString *indexString = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    
+    if ([[_cellIndexDictionary allKeys] count] > indexPath.section) {
+        [cell resetSliderAtIndex:[(NSNumber *)([_cellIndexDictionary objectForKey:indexString]) intValue]];
     } else {
-        [_cellIndexArray addObject:[NSNumber numberWithInt:0]];
+        [_cellIndexDictionary setObject:[NSNumber numberWithInt:0] forKey:indexString];
         [cell resetSliderAtIndex:0];
     }
     
@@ -62,21 +73,41 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [[[[EventsManager getSharedInstance] eventsDictionary] allKeys] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    NSArray *keysArray = [[EventsManager getSharedInstance] sortedKeys];
+    return [[[[EventsManager getSharedInstance] eventsDictionary] objectForKey:[keysArray objectAtIndex:section]] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45.0f;
 }
 
-#pragma mark - EventCell Delegate Methods
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30.0f;
+}
 
-- (void)cellAtRow:(int)row didSlideToIndex:(int)index {
-    [_cellIndexArray replaceObjectAtIndex:row withObject:[NSNumber numberWithInt:index]];
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSArray *keysArray = [[EventsManager getSharedInstance] sortedKeys];
+    return (NSString *)[keysArray objectAtIndex:section];
+}
+
+#pragma mark - EventCell Delegate Methods
+//
+//- (void)cellAtRow:(int)row didSlideToIndex:(int)index {
+//    [_cellIndexArray replaceObjectAtIndex:row withObject:[NSNumber numberWithInt:index]];
+//}
+
+- (void)cellAtIndex:(NSIndexPath *)cellIndex didSlideToIndex:(int)index {
+    [_cellIndexDictionary setObject:[NSString stringWithFormat:@"%d",index] forKey:[NSString stringWithFormat:@"%d-%d",cellIndex.section,cellIndex.row]];
+}
+
+#pragma mark - EventManagerDelegate Methods
+
+- (void)eventsFetchComplete {
+    [_tableView reloadData];
 }
 
 @end

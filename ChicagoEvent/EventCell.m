@@ -55,8 +55,9 @@
     [_sliderView resetSliderAtIndex:index];
 }
 
-- (void)configureWithIndex:(int)index {
-    _index = index;
+- (void)configureWithIndex:(NSIndexPath *)cellIndex andEvent:(Event *)event {
+    _index = cellIndex;
+    _event = event;
 }
 
 #pragma mark - Setup Methods
@@ -94,8 +95,8 @@
 #pragma mark - Delegate Methods
 
 - (void)didSlideToIndex:(int)index {
-    if ([_delegate respondsToSelector:@selector(cellAtRow:didSlideToIndex:)]) {
-        [_delegate cellAtRow:_index didSlideToIndex:index];
+    if ([_delegate respondsToSelector:@selector(cellAtIndex:didSlideToIndex:)]) {
+        [_delegate cellAtIndex:_index didSlideToIndex:index];
     }
 }
 

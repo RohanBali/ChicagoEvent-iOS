@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Rohan Bali. All rights reserved.
 //
 
+//TODO: There is a bug when you can interact with both left and right slider independently
+
 #import <UIKit/UIKit.h>
 
 @protocol SliderViewDelegate <NSObject>
